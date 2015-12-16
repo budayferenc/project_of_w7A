@@ -1,0 +1,1 @@
+alter table users Add animal_name VARCHAR(50) Null;

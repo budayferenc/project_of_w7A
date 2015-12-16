@@ -1,0 +1,36 @@
+CREATE SCHEMA IF NOT EXISTS meetupsdb DEFAULT CHARACTER SET utf8;
+USE meetupsdb;
+CREATE TABLE meetupsdb.Meetups (
+    Id INTEGER NOT NULL AUTO_INCREMENT,
+    Start DATETIME NOT NULL,
+    Location VARCHAR(150) NOT NULL,
+    TOPIC VARCHAR(150) NOT NULL,
+    DESCRIPTION VARCHAR(1000) NOT NULL,
+    PRIMARY KEY (Id));
+
+CREATE TABLE meetupsdb.Users (
+    Id INTEGER NOT NULL AUTO_INCREMENT,
+    Name VARCHAR(100) NOT NULL,
+    Birthdate DATETIME NOT NULL,
+    Introduction VARCHAR(500),
+    AVATAR VARCHAR(1000),
+    Email VARCHAR(150),
+    PRIMARY KEY (Id));
+
+CREATE TABLE meetupsdb.Statuses (
+    Id INTEGER NOT NULL AUTO_INCREMENT,
+    Value VARCHAR(50) NOT NULL,
+    PRIMARY KEY (Id));
+
+CREATE TABLE meetupsdb.MeetupRegistrations (
+    Id INTEGER NOT NULL AUTO_INCREMENT,
+    StatusId INTEGER NOT NULL,
+    MeetupId INTEGER NOT NULL,
+    UserId INTEGER NOT NULL,
+    PRIMARY KEY(Id),
+    FOREIGN KEY (StatusId)
+        REFERENCES Statuses(id),
+    FOREIGN KEY (MeetupId)
+        REFERENCES Meetups(id),
+    FOREIGN KEY (UserID)
+        REFERENCES Users(id));
